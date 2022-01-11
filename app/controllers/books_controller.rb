@@ -9,13 +9,12 @@ class BooksController < ApplicationController
   end
 
   def create
-    @book = Book.new(book_params)
-    if @book.save
-      redirect_to show_book_path(@book.id)
+    @newBook = Book.new(book_params)
+    if @newBook.save
+      redirect_to show_book_path(@newBook.id)
     else
       @books = Book.all #indexのviewページを再表示するためにレンディング前にインスタンスを再作成
-      @newBook = @book #片方でもフォームに入力した内容を再表示するため、indexページのnewBookに代入
-      render:index
+      render:index #エラーがあった場合はindexのviewページに戻す
     end
   end
 
@@ -30,9 +29,9 @@ class BooksController < ApplicationController
   def update
     @book = Book.find(params[:id])
     if @book.update(book_params)
-      redirect_to show_book_path(@book.id)
+      redirect_to show_book_path(@book.id) #対応するviewファイルがないのでshowのviewページへリダイレクト
     else
-      render:edit
+      render:edit #エラーがあった場合はeditのviewページに戻す
     end
   end
 
