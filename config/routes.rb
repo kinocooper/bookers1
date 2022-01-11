@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   #get 'top' => 'homes#top'
   root to: 'homes#top'
   get 'books' => 'books#index',as: 'index'
-  post 'books/:id' => 'books#create'#,as: 'create_book'
+  post 'books/:id' => 'books#create',as: 'create_book'
   get 'books/:id' => 'books#show',as: 'show_book'
   get 'books/:id/edit' => 'books#edit',as: 'edit_book'
   patch 'books/:id' => 'books#update',as: 'update_book'
