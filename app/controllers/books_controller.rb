@@ -11,7 +11,8 @@ class BooksController < ApplicationController
   def create
     @newBook = Book.new(book_params)
     if @newBook.save
-      redirect_to show_book_path(@newBook.id)
+       #対応するviewファイルがないのでshowのviewページへリダイレクト
+      redirect_to show_book_path(@newBook.id),notice: 'Book was successfully created.'
     else
       @books = Book.all #indexのviewページを再表示するためにレンディング前にインスタンスを再作成
       render:index #エラーがあった場合はindexのviewページに戻す
@@ -29,7 +30,8 @@ class BooksController < ApplicationController
   def update
     @book = Book.find(params[:id])
     if @book.update(book_params)
-      redirect_to show_book_path(@book.id) #対応するviewファイルがないのでshowのviewページへリダイレクト
+       #対応するviewファイルがないのでshowのviewページへリダイレクト
+      redirect_to show_book_path(@book.id),notice: 'Book was successfully updated.'
     else
       render:edit #エラーがあった場合はeditのviewページに戻す
     end
@@ -38,7 +40,8 @@ class BooksController < ApplicationController
   def destroy
     book = Book.find(params[:id])
     book.destroy
-    redirect_to index_path
+    #対応するviewファイルがないのでindexのviewページへリダイレクト
+    redirect_to index_path,notice: 'Book was successfully deleted.'
   end
 
   private
